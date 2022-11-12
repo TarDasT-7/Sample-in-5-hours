@@ -14,3 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\V1\Web\HomeController::class, 'index'])->name('home.index');
+Route::resource('songs', App\Http\Controllers\V1\Web\SongController::class);
+Route::resource('categories', App\Http\Controllers\V1\Web\CategoryController::class);
+Route::resource('artists', App\Http\Controllers\V1\Web\ArtistController::class);

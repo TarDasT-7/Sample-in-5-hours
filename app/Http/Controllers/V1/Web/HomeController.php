@@ -22,7 +22,6 @@ class HomeController extends Controller
         $topSongs = $this->repository->topSongs();
         $topCategories = $this->repository->topCategories();
         $topArtists = $this->repository->topArtists();
-
         return view($this->localPath . 'index', compact('topSongs', 'topCategories', 'topArtists'));
     }
 }

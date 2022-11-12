@@ -8,6 +8,8 @@ use App\Models\Song;
 
 class HomeRepository
 {
+
+
     public function topSongs()
     {
         return Song::orderBy('created_at', 'desc')->take(4)->get();
