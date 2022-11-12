@@ -9,5 +9,17 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title']; 
+    protected $fillable = ['title'];
+    protected $appends = ['count_song'];
+
+    public function songs()
+    {
+        return $this->hasMany(Song::class);
+    }
+    
+    public function getCountSongAttribute()
+    {
+        return $this->songs->count();
+
+    }
 }

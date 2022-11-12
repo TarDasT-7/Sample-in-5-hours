@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #1A1A1B;
+}
+
+.border-radius-5
+{
+    border-radius: 5px;
+}
+.card-detail{
+    position: relative;
+    bottom: 25px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.card-item{    
+    cursor: pointer;
+    box-shadow:0 19px 38px rgb(63 63 63 / 30%), 0 15px 12px rgb(83 83 83 / 22%);
+    transition: .2s;
+}
+.category-detail{
+    border-radius: 5px;
+    margin-top: 25px;
+}
+.card-item a {
+    color: #1A1A1B;
+    text-decoration: none;
+}
+.card-item:hover{
+    opacity: .8;
+}    
+
+

@@ -14,10 +14,10 @@ class ArtistSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Artist::factory()->create(['name' => 'Tupac Amaru Shakur','nick_name' => 'Tupac']);
-        \App\Models\Artist::factory()->create(['name' => 'Marshall Bruce Mathers III','nick_name' => 'Eminem']);
-        \App\Models\Artist::factory()->create(['name' => 'Aubrey Drake','nick_name' => 'Drake']);
-        \App\Models\Artist::factory()->create(['name' => 'Billie Eilish','nick_name' => 'Billie']);
-        \App\Models\Artist::factory()->create(['name' => 'Dominique Armani Jones','nick_name' => 'Lil Baby']);
+        \App\Models\Artist::factory()->create(['name' => 'Tupac Amaru Shakur','nick_name' => 'Tupac','image'=>'Tupac.jpg']);
+        \App\Models\Artist::factory()->create(['name' => 'Marshall Bruce Mathers III','nick_name' => 'Eminem','image'=>'Eminem.jpg']);
+        \App\Models\Artist::factory()->create(['name' => 'Aubrey Drake','nick_name' => 'Drake','image'=>'Drake.jpg']);
+        \App\Models\Artist::factory()->create(['name' => 'Billie Eilish','nick_name' => 'Billie','image'=>'Billie.jpg']);
+        \App\Models\Artist::factory()->create(['name' => 'Dominique Armani Jones','nick_name' => 'Lil Baby','image'=>'LilBaby.jpg']);
     }
 }
