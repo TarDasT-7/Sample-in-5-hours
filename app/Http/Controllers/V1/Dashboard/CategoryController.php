@@ -1,30 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\V1\Web;
+namespace App\Http\Controllers\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ArtistRepository;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\CategoryResource;
+use App\Models\Category;
+use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 
-class ArtistController extends Controller
+class CategoryController extends Controller
 {
-    protected $localPath = "web.pages.artists.";
-    protected $repository;
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ArtistRepository $repository)
+
+    protected $repository;
+
+    public function __construct(CategoryRepository $repository)
     {
         $this->repository = $repository;
     }
 
     public function index()
     {
-        $artists = $this->repository->artists();
-        return view($this->localPath .'index', compact('artists'));
+        return CategoryResource::collection($this->repository->categories());
     }
 
     /**
@@ -43,9 +45,9 @@ class ArtistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $this->repository->storeCategory($request) ? response()->json('success', 200) : response()->json('err', 500);
     }
 
     /**
@@ -56,9 +58,7 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        $songs = $this->repository->songs($id);
-        $artist = $this->repository->artist($id);
-        return view($this->localPath .'show', compact('songs','artist'));
+        return new CategoryResource($this->repository->findCategory($id));
     }
 
     /**
@@ -79,9 +79,9 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $this->repository->updateCategory($request,$id) ? response()->json('success', 200) : response()->json('err', 500);
     }
 
     /**
@@ -92,6 +92,6 @@ class ArtistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->findCategory($id)->delete() ? response()->json('success', 200) : response()->json('err', 500);    
     }
 }

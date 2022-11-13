@@ -7,7 +7,7 @@ use App\Models\Song;
 class SongRepository
 {
 
-    public function allSong()
+    public function songs()
     {
         return Song::orderBy('created_at', 'desc')->get();
     }

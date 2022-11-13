@@ -9,7 +9,7 @@
 
 
     <div class="m-5" id="songs">
-
+        <h6 class="text-white fs-4">Categories</h6>
         <div class="row">
             @foreach ($categories as $category)
                 <div class="col-2 text-center card-item">

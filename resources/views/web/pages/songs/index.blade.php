@@ -9,14 +9,12 @@
 
 
     <div class="m-5" id="songs">
-        <a href="{{   route('songs.index')  }}" style="text-decoration: none">
-            <h6 class="text-white fs-4">All Songs</h6>
-        </a>
+        <h6 class="text-white fs-4">All Songs</h6>
         <div class="row">
             @foreach ($songs as $song)
                 <div class="col-3 text-center card-item">
-                    <a href="{{   route('songs.show', $song->id)  }}">
-                        <img src="{{asset('/web/assets/images/'.$song->cover)}}" class="mt-2 m-auto border-radius-5"
+                    <a href="{{ route('songs.show', $song->id) }}">
+                        <img src="{{ asset('/web/assets/images/' . $song->cover) }}" class="mt-2 m-auto border-radius-5"
                             alt="{{ $song->name }}" width="100%" height="425px">
                         <div class="w-100 bg-warning p-3 fs-6 card-detail">
                             {{ $song->name }}

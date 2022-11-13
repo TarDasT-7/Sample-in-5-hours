@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use PhpParser\Node\Stmt\Foreach_;
 
 class Song extends Model
 {
@@ -27,6 +28,20 @@ class Song extends Model
     public function getSimilarsAttribute()
     {
         $category = $this->category->id;
-        return Song::where('category_id',$category)->where('id','!=',$this->id)->orderBy('created_at','desc')->take(4)->get();
+        
+        $likeCategory = Song::where('category_id',$category)->where('id','!=',$this->id)->orderBy('created_at','desc')->take(2)->get();
+
+        $unique = array();
+
+        foreach($this->artists as $artist)
+            foreach($artist->songs as $song)
+                if(count($unique) < 2 && $this->id != $song->id)
+                    array_push($unique, $song);
+
+        foreach($likeCategory as $like)
+            if(!in_array($like, $unique) && $like->id != $this->id)
+                array_push($unique, $like);
+
+        return $unique;
     }
 }

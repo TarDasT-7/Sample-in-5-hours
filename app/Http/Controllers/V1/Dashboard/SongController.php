@@ -1,30 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\V1\Web;
+namespace App\Http\Controllers\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
 
-class ArtistController extends Controller
+class SongController extends Controller
 {
-    protected $localPath = "web.pages.artists.";
-    protected $repository;
-    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(ArtistRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     public function index()
     {
-        $artists = $this->repository->artists();
-        return view($this->localPath .'index', compact('artists'));
+        //
     }
 
     /**
@@ -56,9 +46,7 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        $songs = $this->repository->songs($id);
-        $artist = $this->repository->artist($id);
-        return view($this->localPath .'show', compact('songs','artist'));
+        //
     }
 
     /**

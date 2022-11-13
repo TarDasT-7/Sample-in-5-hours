@@ -23,7 +23,7 @@ class SongController extends Controller
 
     public function index()
     {
-        $songs = $this->repository->allSong();
+        $songs = $this->repository->songs();
         return view($this->localPath .'index', compact('songs'));
     }
 

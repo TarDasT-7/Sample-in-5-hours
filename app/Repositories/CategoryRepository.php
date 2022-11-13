@@ -16,12 +16,28 @@ class CategoryRepository
 
     public function categories()
     {
-        return Category::orderBy('created_at', 'desc')->get();
+        return Category::query()->orderBy('created_at', 'desc')->get();
     }
 
     public function categorySongs($id)
     {
         return Category::query()->findOrFail($id)->songs;
+    }
+    // --------------------------------------------------
+    public function storeCategory($request)
+    {
+        $result = Category::query()->create([
+            'title'=>$request->title
+        ]);
+        return $result;
+    }
+
+    public function updateCategory($request, $id)
+    {
+        $result = Category::query()->findOrFail($id)->update([
+            'title'=>$request->title
+        ]);
+        return $result;
     }
 
 

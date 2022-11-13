@@ -6,22 +6,23 @@ use App\Models\Artist;
 use App\Models\Category;
 use App\Models\Song;
 
-class HomeRepository
+class ArtistRepository
 {
 
 
-    public function topSongs()
+    public function artist($id)
     {
-        return Song::orderBy('created_at', 'desc')->take(4)->get();
+        return Artist::query()->findOrFail($id);
     }
 
-    public function topCategories()
+    public function artists()
     {
-        return Category::orderBy('created_at', 'desc')->take(6)->get();
+        return Artist::orderBy('created_at', 'desc')->get();
     }
 
-    public function topArtists()
+    public function songs($id)
     {
-        return Artist::orderBy('created_at', 'desc')->take(4)->get();
+        return Artist::query()->findOrFail($id)->songs;
     }
+
 }
