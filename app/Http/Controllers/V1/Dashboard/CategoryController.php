@@ -5,9 +5,7 @@ namespace App\Http\Controllers\V1\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
-use App\Models\Category;
-use App\Repositories\CategoryRepository;
-use Illuminate\Http\Request;
+use App\Http\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {

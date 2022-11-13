@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\V1\Web;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\SongRepository;
+use App\Http\Repositories\SongRepository;
 use Illuminate\Http\Request;
 
 class SongController extends Controller

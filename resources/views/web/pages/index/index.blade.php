@@ -37,7 +37,7 @@
             @foreach ($topSongs as $song)
                 <div class="col-3 text-center card-item">
                     <a href="{{ route('songs.show', $song->id) }}">
-                        <img src="{{ asset('/web/assets/images/' . $song->cover) }}" class="mt-2 m-auto border-radius-5"
+                        <img src="{{ $song->cover_link}}" class="mt-2 m-auto border-radius-5"
                             alt="{{ $song->name }}" width="100%" height="425px">
                         <div class="w-100 bg-warning p-3 fs-6 card-detail">
                             {{ $song->name }}
@@ -70,7 +70,7 @@
             @foreach ($topArtists as $artist)
                 <div class="col-3 text-center card-item">
                     <a href="{{ route('artists.show', $artist->id) }}">
-                        <img src="{{ asset('/web/assets/images/' . $artist->image) }}" class="mt-2 m-auto border-radius-5"
+                        <img src="{{ $artist->image_link}}" class="mt-2 m-auto border-radius-5"
                             alt="{{ $artist->nick_name }}" width="100%" height="425px">
                         <div class="w-100 bg-warning p-3 fs-6 card-detail">{{ $artist->nick_name }}</div>
                     </a>

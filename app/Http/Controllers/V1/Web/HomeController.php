@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\V1\Web;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\HomeRepository;
+use App\Http\Repositories\HomeRepository;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller

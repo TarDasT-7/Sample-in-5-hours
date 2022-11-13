@@ -13,7 +13,7 @@
         <div class="row text-center">
             <div class="text-center card-item">
                 <a href="{{ route('songs.show', $song->id) }}">
-                    <img src="{{ asset('/web/assets/images/' . $song->cover) }}" class="mt-2 m-auto border-radius-5"
+                    <img src="{{ $song->cover_link}}" class="mt-2 m-auto border-radius-5"
                         alt="{{ $song->name }}">
                     <div class="row">
 

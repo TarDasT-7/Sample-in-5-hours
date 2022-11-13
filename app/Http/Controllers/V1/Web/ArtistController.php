@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\V1\Web;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ArtistRepository;
+use App\Http\Repositories\ArtistRepository;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller

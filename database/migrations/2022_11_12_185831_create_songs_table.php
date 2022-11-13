@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('cover')->nullable();
             $table->string('music')->nullable();
-            $table->string('time');
+            $table->string('time')->nullable()->default('3:20');
             $table->text('text')->nullable();
             $table->timestamps();
         });

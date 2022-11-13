@@ -12,7 +12,7 @@ class Song extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'category_id', 'cover', 'music', 'time', 'text'];
-    protected $appends = ['similars'];
+    protected $appends = ['similars','cover_link','music_link'];
 
 
     public function artists()
@@ -43,5 +43,15 @@ class Song extends Model
                 array_push($unique, $like);
 
         return $unique;
+    }
+
+    public function getCoverLinkAttribute()
+    {
+        return asset("storage/images/$this->cover");
+    }
+
+    public function getMusicLinkAttribute()
+    {
+        return asset("storage/sounds/$this->music");
     }
 }

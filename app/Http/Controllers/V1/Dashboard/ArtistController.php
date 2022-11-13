@@ -3,6 +3,11 @@
 namespace App\Http\Controllers\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\artist\ArtistRequest;
+use App\Http\Requests\artist\UpdateArtistRequest;
+use App\Http\Resources\ArtistResource;
+use App\Http\Repositories\ArtistRepository;
+
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -12,9 +17,17 @@ class ArtistController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $repository;
+
+    public function __construct(ArtistRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     public function index()
     {
-        //
+        return ArtistResource::collection($this->repository->artists());   
     }
 
     /**
@@ -33,9 +46,10 @@ class ArtistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArtistRequest $request)
     {
-        //
+        $this->repository->storeArtist($request) ? response()->json('success', 200) : response()->json('err', 500);
+        
     }
 
     /**
@@ -46,7 +60,7 @@ class ArtistController extends Controller
      */
     public function show($id)
     {
-        //
+        return new ArtistResource($this->repository->artist($id));
     }
 
     /**
@@ -67,9 +81,9 @@ class ArtistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateArtistRequest $request, $id)
     {
-        //
+        $this->repository->updateArtist($request,$id) ? response()->json('success', 200) : response()->json('err', 500);
     }
 
     /**
@@ -80,6 +94,6 @@ class ArtistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->repository->artist($id)->delete() ? response()->json('success', 200) : response()->json('err', 500);    
     }
 }
