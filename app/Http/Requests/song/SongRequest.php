@@ -31,10 +31,10 @@ class SongRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'artists*'=> 'required|numeric|exists:artists',
-            'category_id' => 'required|exists:categories',
+            'artists*'=> 'numeric|exists:artists,id',
+            'category_id' => 'required|exists:categories,id',
             'cover' => 'required|max:2000',
-            'music' => 'required|max:5000',
+            'music' => 'required|max:500000',
             'text' => 'max:5000',
         ];
     }

@@ -34,9 +34,7 @@
 
                         <div class="col-12 bg-warning card-detail text-center">
                             <audio controls style="width: 90%;">
-                                <source src="horse.ogg" type="audio/ogg">
-                                <source src="horse.mp3" type="audio/mpeg">
-                                Your browser does not support the audio tag.
+                                <source src="{{$song->music_link}}" >
                             </audio>
                         </div>
 

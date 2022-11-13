@@ -31,7 +31,8 @@ class UpdateSongRequest extends FormRequest
     {
         return [
             'name' => 'required|max:100',
-            'artists*'=> 'required|numeric|exists:artists',
+            'artists'=> 'required',
+            'artists*'=> 'numeric|exists:artists',
             'category_id' => 'required|exists:categories',
             'cover' => 'max:2000',
             'music' => 'max:5000',

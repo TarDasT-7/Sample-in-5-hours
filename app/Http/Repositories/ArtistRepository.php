@@ -12,17 +12,7 @@ class ArtistRepository
 
     private function fileName($name)
     {
-        $fileName = explode(' ',$name);
-        $edit = '';
-        foreach($fileName as $key=> $item)
-        {
-            $edit += $item;
-            if(count($fileName) < $key + 1)
-            {
-                $edit += "_";
-            }
-        }
-        return $edit;
+        return str_replace(' ', '_', $name);
     }
 
     public function artist($id)
@@ -52,8 +42,8 @@ class ArtistRepository
         {
             $image      = $request->file('image');
             $fileName   = $this->fileName($request->nick_name).'.' . $image->getClientOriginalExtension();
-            Storage::disk('public')->put('images/'.$fileName, $image);
-            $artist->query()->update(['name' => $fileName]);
+            $image->storeAs('public/images', $fileName);
+            $artist->update(['image' => $fileName]);
         }
         return ;
     }
@@ -70,8 +60,8 @@ class ArtistRepository
             Storage::disk('public')->delete('images/'.$artist->image);
             $image      = $request->file('image');
             $fileName   = $this->fileName($request->nick_name).'.' . $image->getClientOriginalExtension();
-            Storage::disk('public')->put('images/'.$fileName, $image);
-            $artist->query()->update(['image-' => $fileName]);
+            $image->storeAs('public/images', $fileName);
+            $artist->update(['image' => $fileName]);
         }
         return ;
     }

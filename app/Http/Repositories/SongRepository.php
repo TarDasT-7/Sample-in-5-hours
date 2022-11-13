@@ -12,17 +12,7 @@ class SongRepository
 
     private function fileName($name)
     {
-        $fileName = explode(' ',$name);
-        $edit = '';
-        foreach($fileName as $key=> $item)
-        {
-            $edit += $item;
-            if(count($fileName) < $key + 1)
-            {
-                $edit += "_";
-            }
-        }
-        return $edit;
+        return str_replace(' ', '_', $name);
     }
 
     public function songs()
@@ -49,19 +39,19 @@ class SongRepository
         {
             $image      = $request->file('cover');
             $fileName   = $this->fileName($request->name).'.' . $image->getClientOriginalExtension();
-            Storage::disk('public')->put('images/'.$fileName, $image);
-            $song->query()->update(['cover' => $fileName]);
+            $image->storeAs('public/images', $fileName);
+            $song->update(['cover' => $fileName]);
         }
 
         if($request->hasFile('music'))
         {
             $sound      = $request->file('music');
             $fileName   = $this->fileName($request->name).'.' . $sound->getClientOriginalExtension();
-            Storage::disk('public')->put('sounds/'.$fileName, $sound);
+            $sound->storeAs('public/sounds', $fileName);
 
-            $mp3file = new MP3File($fileName);
-            $time = MP3File::formatTime($mp3file->getDuration());
-            $song->query()->update(['music' => $fileName,'time'=>$time]);
+            // $mp3file = new MP3File($fileName);
+            // $time = MP3File::formatTime($mp3file->getDuration());
+            $song->update(['music' => $fileName]);
         }
 
         if($song)
@@ -88,8 +78,8 @@ class SongRepository
             Storage::disk('public')->delete('images/'.$song->cover);
             $image      = $request->file('cover');
             $fileName   = $this->fileName($request->name).'.' . $image->getClientOriginalExtension();
-            Storage::disk('public')->put('images/'.$fileName, $image);
-            $song->query()->update(['cover' => $fileName]);
+            $image->storeAs('public/images', $fileName);
+            $song->update(['cover' => $fileName]);
         }
 
         if($request->hasFile('music'))
@@ -97,16 +87,16 @@ class SongRepository
             Storage::disk('public')->delete('sounds/'.$song->music);
             $sound      = $request->file('music');
             $fileName   = $this->fileName($request->name).'.' . $sound->getClientOriginalExtension();
-            Storage::disk('public')->put('sounds/'.$fileName, $sound);
+            $sound->storeAs('public/sounds', $fileName);
 
-            $mp3file = new MP3File($fileName);
-            $time = MP3File::formatTime($mp3file->getDuration());
-            $song->query()->update(['music' => $fileName,'time'=>$time]);
+            // $mp3file = new MP3File($fileName);
+            // $time = MP3File::formatTime($mp3file->getDuration());
+            $song->update(['music' => $fileName]);
         }
 
 
         foreach($request->artists as $artist)
-            ArtistSong::query()->updateOrCreate([
+            ArtistSong::updateOrCreate([
                 'song_id' => $id,
                 'artist_id' => $artist,
             ]);
